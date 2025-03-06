@@ -1,16 +1,16 @@
 const TelegramBot = require('node-telegram-bot-api');
 const schedule = require('node-schedule');
 
-// Thay token mới của anh vào đây
-const bot = new TelegramBot('7971005513:AAHuP0jgcqqXdsAJilan9NTNZX9n0NYWP40', { polling: true });
+// Lấy token từ biến môi trường (GitHub Secrets)
+const token = process.env.TELEGRAM_BOT_TOKEN;
+const bot = new TelegramBot(token, { polling: true });
 
-// Thay chat ID của anh vào đây
+// Chat ID của anh
 const chatId = '6410461585';
 
-// Kiểm tra khi có tin nhắn đến
+// Nhận tin nhắn
 bot.on('message', (msg) => {
     console.log('Nhận tin nhắn:', msg.text);
-    console.log('Chat ID:', msg.chat.id);
     bot.sendMessage(chatId, '✅ Bot đang hoạt động! Bạn vừa nhắn: ' + msg.text);
 });
 
