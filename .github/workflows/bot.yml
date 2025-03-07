@@ -1,22 +1,19 @@
 name: Run Telegram Bot
 
 on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *' # Tự động khởi động lại bot lúc 5h sáng hàng ngày
+    - cron: '0 */6 * * *' # Tự động chạy lại bot mỗi 6 giờ
+  workflow_dispatch: # Cho phép khởi động thủ công
 
 jobs:
-  run-bot:
+  start-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
